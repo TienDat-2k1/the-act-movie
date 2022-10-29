@@ -1,0 +1,9 @@
+@use './variables' as *;
+
+.paragraph {
+  font-size: $font-size--default;
+}
+
+ul {
+  list-style: none;
+}

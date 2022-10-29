@@ -1,0 +1,14 @@
+@use '../../sass/mixins' as *;
+
+.main-layout {
+  display: flex;
+  min-height: 100vh;
+
+  @include respond(sm) {
+    flex-direction: column;
+  }
+
+  & > div {
+    flex: 1;
+  }
+}
