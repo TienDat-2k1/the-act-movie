@@ -2,6 +2,7 @@
 @use '../../sass/mixins' as *;
 
 .home {
+  width: 100%;
   padding: 1.75rem;
   font-size: 1.6rem;
   &__user {
@@ -32,8 +33,14 @@
   }
 
   &__search {
+    position: relative;
     width: 40%;
+    // height: 50px;
     min-width: 300px;
+
+    @include respond(sm) {
+      min-width: 200px;
+    }
   }
 }
 
@@ -46,6 +53,10 @@
     display: flex;
     gap: 2rem;
     font-size: 1.8rem;
+
+    @include respond(sm) {
+      font-size: 1.6rem;
+    }
   }
 
   & nav li {

@@ -1,5 +1,6 @@
 // form
 @use '../../../sass/variables' as *;
+@use '../../../sass/mixins' as *;
 
 .search-box form {
   display: flex;
@@ -36,18 +37,39 @@
 
 .search-box {
   position: relative;
-  width: 100%;
   background-color: $color--dark;
-  padding: 1.2rem 2.4rem;
+  padding: 12px 24px;
   border-radius: 99px;
+
+  @include respond(sm) {
+    padding: 6px 12px;
+  }
 
   &.expand {
     border-radius: 26px;
+    border-radius: 26px 26px 0 0;
   }
 
   &__results {
-    margin-top: 1.2rem;
-    border-top: 1px solid #ccc;
+    position: absolute;
+    background-color: $color--dark;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    z-index: 99;
+    padding: 1.2rem 1.6rem;
+    border-radius: 0 0 26px 26px;
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: 85%;
+      transform: translateX(-50%);
+      background-color: #ccc;
+      height: 1px;
+    }
   }
 
   &__result {

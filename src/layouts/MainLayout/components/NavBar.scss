@@ -1,22 +1,26 @@
 @use '../../../sass/variables' as *;
 @use '../../../sass/mixins' as *;
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
 
 .nav-bar {
   width: 28rem;
+  // flex-basis: 28rem;
 
   padding-left: 2rem;
-  transition: all 0.4s;
   border-right: 1px solid rgba($color--white, 0.2);
   overflow: hidden;
+  transition: all 0.4s;
 
   &.only-icon {
     width: 6rem;
+    // flex-basis: 6rem;
     padding-left: 2px;
   }
 
   @include respond(sm) {
     width: 100%;
     display: flex;
+    align-items: center;
     justify-content: space-between;
   }
 
@@ -40,6 +44,7 @@
   display: flex;
   align-items: center;
   gap: 2rem;
+  user-select: none;
 
   & img {
     margin-left: 10px;
@@ -50,6 +55,8 @@
 
   & > h1 {
     font-size: 3.2rem;
+    font-family: 'Lobster', sans-serif, cursive;
+    color: $color--primary-light;
   }
 }
 
@@ -125,7 +132,7 @@
     display: none;
 
     @include respond(sm) {
-      display: block;
+      display: flex;
       padding: 0 1rem;
       margin-right: 1rem;
       cursor: pointer;

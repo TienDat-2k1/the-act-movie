@@ -3,6 +3,8 @@
 .main-layout {
   display: flex;
   min-height: 100vh;
+  max-width: 100vw;
+  overflow: hidden;
 
   @include respond(sm) {
     flex-direction: column;
@@ -10,5 +12,22 @@
 
   & > div {
     flex: 1;
+    max-width: calc(100vw - 28rem);
+    transition: all 0.4s;
+
+    &.nav-only-icon {
+      max-width: calc(100vw - 6rem);
+
+      @include respond(sm) {
+        max-width: 100%;
+      }
+    }
+
+    @include respond(sm) {
+      max-width: 100%;
+    }
+
+    // max-width: 100%;
+    // max-width: calc(100vw - 6rem);
   }
 }

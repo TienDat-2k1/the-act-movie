@@ -27,9 +27,13 @@ const menus = [
   },
 ];
 
-const NavBar = () => {
+type NavBarProps = {
+  isOnlyIcon: boolean;
+  setIsOnlyIcon: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+const NavBar: React.FC<NavBarProps> = ({ isOnlyIcon, setIsOnlyIcon }) => {
   const [isNavMobile, setIsNavMobile] = useState(false);
-  const [isOnlyIcon, setIsOnlyIcon] = useState(true);
   const { width } = useWinDowDimension();
 
   return (
