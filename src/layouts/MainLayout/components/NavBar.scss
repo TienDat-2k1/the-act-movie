@@ -3,8 +3,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
 
 .nav-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 99;
   width: 28rem;
-  // flex-basis: 28rem;
+  height: 100vh;
 
   padding-left: 2rem;
   border-right: 1px solid rgba($color--white, 0.2);
@@ -18,6 +22,7 @@
   }
 
   @include respond(sm) {
+    height: 8rem;
     width: 100%;
     display: flex;
     align-items: center;
@@ -45,6 +50,11 @@
   align-items: center;
   gap: 2rem;
   user-select: none;
+  margin-top: 2rem;
+
+  @include respond(sm) {
+    margin-top: 0;
+  }
 
   & img {
     margin-left: 10px;
@@ -75,6 +85,7 @@
 
     &.mobile {
       width: 30rem;
+
       & + div:empty {
         display: none;
         @include respond(sm) {

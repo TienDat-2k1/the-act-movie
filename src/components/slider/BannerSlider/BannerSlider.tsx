@@ -12,6 +12,7 @@ import {
 } from '../../../store/Home/homeSelector';
 import './BannerSlider.scss';
 import Button from '../../common/Button/Button';
+import Skeleton from '../../Skeleton/Skeleton';
 
 type BannerSliderProps = {
   currentTab: string;
@@ -22,13 +23,21 @@ const BannerSlider: React.FC<BannerSliderProps> = ({ currentTab }) => {
   const movieBanner = useSelector(homeMovieBanner);
   const banner = currentTab === 'movie' ? movieBanner : tvBanner;
 
+  if (!Object.entries(banner).length)
+    return (
+      <Skeleton
+        variant="rect"
+        style={{ width: '100%', height: '60vh', marginTop: '2rem' }}
+      />
+    );
+
   return (
     <section className="banner">
       <Swiper
-        // autoplay={{
-        //   delay: 5000,
-        //   disableOnInteraction: false,
-        // }}
+        autoplay={{
+          delay: 5000,
+          disableOnInteraction: false,
+        }}
         loop={true}
         modules={[Autoplay]}
       >

@@ -1,0 +1,28 @@
+@use '../../sass/animations' as *;
+
+.skeleton {
+  display: block;
+  background-color: #161616;
+  animation: pulse 1.5s ease-in-out 0.5s infinite;
+
+  &--text {
+    height: auto;
+    transform: scale(1, 0.6);
+    margin-top: 0;
+    border-radius: 4px;
+    margin-bottom: 0;
+    transform-origin: 0 60%;
+
+    &:empty::before {
+      content: '\00a0';
+    }
+  }
+
+  &--rect {
+    border-radius: 12px;
+  }
+
+  &--cir {
+    border-radius: 50%;
+  }
+}

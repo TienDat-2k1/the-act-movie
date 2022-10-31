@@ -1,0 +1,19 @@
+@use '../../../sass/variables' as *;
+
+.section-slider {
+  margin-top: 2rem;
+  &__name {
+    font-size: 3.4rem;
+    padding-left: 2rem;
+    border-left: 4px solid $color--primary;
+    line-height: 4rem;
+  }
+}
+
+.section-slider .swiper {
+  padding: 2rem 0;
+}
+
+.section-slider .swiper-slide {
+  width: fit-content;
+}

@@ -9,7 +9,7 @@ export interface Item {
   vote_count: number;
   vote_average: number;
 
-  media_type: 'movie|tv|person';
+  media_type: 'movie' | 'tv' | 'person';
 
   // movie item
   release_date?: string;
