@@ -1,3 +1,4 @@
+import React from 'react';
 import { AiFillStar } from 'react-icons/ai';
 import { FaHeart } from 'react-icons/fa';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
@@ -13,11 +14,12 @@ type ItemCardProps = {
 
 const ItemCard: React.FC<ItemCardProps> = ({ data }) => {
   if (!data.backdrop_path) return <></>;
+
   return (
     <Link to="" className="card">
       <article className="item-card">
         <LazyLoadImage
-          src={imageURL(data.backdrop_path)}
+          src={imageURL(data.poster_path, 'w300')}
           wrapperClassName="item-card__poster"
         />
         <div className="item-card__rate">
@@ -42,4 +44,4 @@ const ItemCard: React.FC<ItemCardProps> = ({ data }) => {
     </Link>
   );
 };
-export default ItemCard;
+export default React.memo(ItemCard);

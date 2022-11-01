@@ -1,7 +1,7 @@
 import { IMAGE_URL } from './contants';
 
-const imageURL = (url: string) => {
-  return IMAGE_URL + url;
+const imageURL = (url: string, size: string = 'original') => {
+  return IMAGE_URL + size + url;
 };
 
 export default imageURL;

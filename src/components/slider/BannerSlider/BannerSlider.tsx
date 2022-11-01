@@ -1,3 +1,4 @@
+import React from 'react';
 import { useSelector } from 'react-redux';
 import { AiFillStar } from 'react-icons/ai';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
@@ -54,7 +55,7 @@ const BannerSlider: React.FC<BannerSliderProps> = ({ currentTab }) => {
               <div className="banner__contents">
                 <div className="banner__poster">
                   <LazyLoadImage
-                    src={imageURL(b.poster_path)}
+                    src={imageURL(b.poster_path, 'w300')}
                     alt={'' + b.id}
                     className="banner__poster-img"
                     effect="blur"
@@ -100,4 +101,4 @@ const BannerSlider: React.FC<BannerSliderProps> = ({ currentTab }) => {
     </section>
   );
 };
-export default BannerSlider;
+export default React.memo(BannerSlider);

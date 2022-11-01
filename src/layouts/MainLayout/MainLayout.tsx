@@ -10,7 +10,7 @@ const MainLayout = () => {
   return (
     <main className="main-layout">
       <NavBar isOnlyIcon={isOnlyIcon} setIsOnlyIcon={setIsOnlyIcon} />
-      <div className={`${isOnlyIcon ? 'nav-only-icon' : ''}`}>
+      <div className={`${isOnlyIcon ? 'nav-only-icon' : ''}`} id="main">
         <Outlet />
       </div>
     </main>

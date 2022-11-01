@@ -8,7 +8,9 @@ type SkeletonOwn = {
   style?: {
     width: string;
     height: string;
-  } & any;
+  } & {
+    [key: string]: string | number;
+  };
 };
 
 type SkeletonProps = SkeletonOwn &

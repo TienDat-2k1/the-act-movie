@@ -1,0 +1,61 @@
+@use '../../sass/variables' as *;
+
+.genres {
+  &__list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 1rem;
+    max-height: 400px;
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    &::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: #f1f1f1;
+      border-radius: 10px;
+    }
+
+    /* Handle */
+    &::-webkit-scrollbar-thumb {
+      background: #888;
+      border-radius: 10px;
+    }
+
+    /* Handle on hover */
+    &::-webkit-scrollbar-thumb:hover {
+      background: #555;
+    }
+  }
+
+  &__item {
+    min-width: 170px;
+    height: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    border: 2px solid #ccc;
+    padding: 4px 16px;
+    border-radius: 99px;
+    transition: all 0.2s;
+    opacity: 0.7;
+
+    &:hover {
+      opacity: 1;
+      border-color: $color--primary;
+    }
+
+    &--active {
+      background-color: $color--primary;
+      border-color: transparent;
+      opacity: 1;
+    }
+
+    user-select: none;
+    cursor: pointer;
+  }
+}

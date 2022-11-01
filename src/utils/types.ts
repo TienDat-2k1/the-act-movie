@@ -132,3 +132,19 @@ export interface IDetailTv extends IDetail {
   }[];
   status: string;
 }
+
+export interface PerPage {
+  page: number;
+  results: Item[];
+  total_results: number;
+  total_pages: number;
+}
+
+export interface IGenre {
+  id: number;
+  name: string;
+}
+
+export interface IConfig {
+  [key: string]: string | number;
+}

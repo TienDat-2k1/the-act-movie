@@ -1,3 +1,4 @@
+import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 
@@ -13,6 +14,7 @@ type SectionSliderProps = {
 
 const SectionSlider: React.FC<SectionSliderProps> = ({ data, title }) => {
   const name = title && capitalizeLetter(title);
+
   return (
     <section className="section-slider">
       <h1 className="section-slider__name">
@@ -28,4 +30,4 @@ const SectionSlider: React.FC<SectionSliderProps> = ({ data, title }) => {
     </section>
   );
 };
-export default SectionSlider;
+export default React.memo(SectionSlider);

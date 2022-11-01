@@ -1,3 +1,4 @@
+import React from 'react';
 import { useSelector } from 'react-redux';
 import Skeleton from '../../components/Skeleton/Skeleton';
 import SectionSlider from '../../components/slider/SectionSlider/SectionSlider';
@@ -32,4 +33,4 @@ const HomeSection: React.FC<HomeSectionProps> = ({ currentTab }) => {
     </>
   );
 };
-export default HomeSection;
+export default React.memo(HomeSection);
