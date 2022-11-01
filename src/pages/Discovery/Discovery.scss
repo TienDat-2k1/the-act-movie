@@ -67,7 +67,7 @@
     cursor: pointer;
 
     &.expand {
-      max-height: calc(100% - 400px);
+      max-height: calc(100vh - 400px);
       padding-bottom: 2rem;
     }
   }
