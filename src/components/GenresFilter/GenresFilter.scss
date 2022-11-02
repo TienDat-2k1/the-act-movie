@@ -1,14 +1,18 @@
 @use '../../sass/variables' as *;
 
 .genres {
+  transition: all 0.3s;
   &__list {
     display: flex;
+    justify-content: center;
     flex-wrap: wrap;
     gap: 12px;
     margin-top: 1rem;
-    max-height: 400px;
+    max-height: 410px;
     overflow-y: auto;
     overflow-x: hidden;
+
+    transition: all 0.3s;
 
     &::-webkit-scrollbar {
       width: 6px;
@@ -32,7 +36,7 @@
   }
 
   &__item {
-    min-width: 170px;
+    width: 240px;
     height: 40px;
     display: flex;
     justify-content: space-between;

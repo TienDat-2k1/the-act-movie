@@ -5,6 +5,6 @@ export const EMBED_VDSRC = '';
 export const EMBED_TO = '';
 
 export const SUPPORT_QUERY = {
-  sort_by: [],
+  sort: [],
   genre: [],
 };

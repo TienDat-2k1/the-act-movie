@@ -1,0 +1,135 @@
+@use '../../sass/variables' as *;
+@use '../../sass/mixins' as *;
+
+.search {
+  font-size: 1.6rem;
+
+  &__container {
+    padding-top: 2rem;
+    display: flex;
+    gap: 2rem;
+
+    @include respond(md) {
+      flex-direction: column-reverse;
+    }
+  }
+
+  &__header {
+    position: relative;
+    z-index: 99;
+    width: calc(100% - 240px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: all 0.3s ease-in-out;
+
+    transform: translateY(72px);
+
+    @include respond(md) {
+      width: 100%;
+    }
+
+    & > h1 {
+      @include respond(md) {
+        font-size: 2.4rem;
+      }
+    }
+
+    @include respond(md) {
+      transform: translate(0);
+    }
+  }
+
+  &__form {
+    width: 60%;
+
+    @include respond(md) {
+      width: 100%;
+    }
+  }
+
+  &__results {
+    width: calc((100% - 240px));
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+
+    @include respond(md) {
+      width: 100%;
+    }
+  }
+
+  &__types {
+    padding: 12px;
+    width: 240px;
+    height: 60px;
+    border-radius: 8px;
+    box-shadow: 0 0 4px 4px rgba($color--white, 0.3);
+    overflow: hidden;
+    transition: all 0.3s;
+
+    @include respond(md) {
+      width: 100%;
+    }
+
+    &.expand {
+      height: 236px;
+    }
+
+    user-select: none;
+
+    & > :first-child {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+  }
+
+  &__type {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    opacity: 0.7;
+    transition: all 0.3s;
+    font-weight: 600;
+
+    &:hover {
+      border-color: $color--primary;
+      opacity: 1;
+    }
+
+    &--active {
+      opacity: 1;
+      border-color: transparent;
+      background-color: $color--primary;
+    }
+
+    &:not(:last-child) {
+      margin-bottom: 1rem;
+    }
+
+    &:nth-child(2) {
+      margin-top: 2rem;
+    }
+  }
+
+  &__img {
+    width: 100%;
+    object-fit: cover;
+    border-radius: 20px;
+    transform: translateY(-100px);
+    transition: all 0.3s;
+
+    @include respond(md) {
+      transform: translate(0);
+    }
+  }
+}
+
+.type-icon {
+  font-size: 2.4rem;
+}

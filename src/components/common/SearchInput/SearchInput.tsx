@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { BiSearchAlt } from 'react-icons/bi';
 import { BsSearch } from 'react-icons/bs';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import useDebounce from '../../../hooks/useDebounce';
 import useOutSide from '../../../hooks/useOutSide';
 import { getSearchWithKeyword } from '../../../services/searchSevices';
@@ -11,16 +12,22 @@ type SearchInputProps = {
 };
 
 const SearchInput: React.FC<SearchInputProps> = ({ autoFocus = false }) => {
+  const navigate = useNavigate();
   const [suggestions, setSuggestions] = useState<string[]>([]);
   const [searchInput, setSearchInput] = useState('');
   const [isEscKey, setIsEscKey] = useState(false);
   const searchInputRef = useRef<HTMLInputElement>(null);
   const suggestionsRef = useRef<HTMLDivElement>(null);
   const isOutside = useOutSide(suggestionsRef);
+  const [_, setSearchParams] = useSearchParams();
 
-  const isSuggestion = !isEscKey && !isOutside && suggestions.length > 0;
+  const [isSuggestion, setIsSuggestion] = useState(false);
 
   const searchInputDebounce = useDebounce(searchInput, 400);
+
+  useEffect(() => {
+    setIsSuggestion(!isEscKey && !isOutside && suggestions.length > 0);
+  }, [isEscKey, isOutside, suggestions]);
 
   useEffect(() => {
     if (!searchInputDebounce) return;
@@ -54,7 +61,10 @@ const SearchInput: React.FC<SearchInputProps> = ({ autoFocus = false }) => {
 
   const searchSubmitHandler = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!searchInput) return;
+    if (!searchInput) return setSearchParams({});
+
+    navigate(`/search?query=${decodeURIComponent(searchInput)}`);
+    setIsSuggestion(false);
   };
 
   return (

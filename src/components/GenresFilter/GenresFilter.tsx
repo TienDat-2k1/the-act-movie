@@ -31,15 +31,16 @@ const GenresFilter: React.FC<GenresFilterProps> = ({ currentTab }) => {
     if (existingGenre.includes(id)) {
       const newGenre = existingGenre.filter(genre => genre !== id);
       setSearchParams({
+        ...currentParams,
         genre: newGenre,
       });
     } else {
-      setSearchParams({ genre: [...existingGenre, id] });
+      setSearchParams({ ...currentParams, genre: [...existingGenre, id] });
     }
   };
 
   return (
-    <div className="genres">
+    <div className="genres" onClick={e => e.stopPropagation()}>
       <h3>Genres</h3>
       <ul className="genres__list">
         {genres.length &&
@@ -52,7 +53,6 @@ const GenresFilter: React.FC<GenresFilterProps> = ({ currentTab }) => {
                   : ''
               }`}
               onClick={e => {
-                e.stopPropagation();
                 genreHandler(genre.id + '');
               }}
             >
