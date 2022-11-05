@@ -1,9 +1,9 @@
-# LIVE DEMO
+# THE ACT MOVIE
 
-[the-act-v2](https://the-act-v2.netlify.app/)
+LIVE DEMO: [the-act-v2](https://the-act-v2.netlify.app/)
 
-This project is version 2
-Version 1: [Live](https://the-movie-ui.netlify.app)
+- This project is version 2
+- Version 1: [the_act-version1](https://the-movie-ui.netlify.app)
 
 ## Movie resource
 
