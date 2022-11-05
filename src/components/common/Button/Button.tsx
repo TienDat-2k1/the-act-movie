@@ -18,7 +18,9 @@ const Button = <E extends React.ElementType = 'button'>({
 }: ButtonProps<E>) => {
   const ButtonComponent = as || 'button';
   return (
-    <ButtonComponent className={`btn ${className}`}>{children}</ButtonComponent>
+    <ButtonComponent className={`btn ${className}`} {...props}>
+      {children}
+    </ButtonComponent>
   );
 };
 export default Button;

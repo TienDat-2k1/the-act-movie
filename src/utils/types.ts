@@ -54,6 +54,11 @@ interface IDetail extends Item {
     origin_country: string;
   }[];
   tagline: string | null;
+  spoken_languages: {
+    english_name?: string;
+    iso_639_1: string;
+    name: string;
+  }[];
 }
 
 export interface IDetailMovie extends IDetail {
@@ -61,14 +66,12 @@ export interface IDetailMovie extends IDetail {
   budget: number;
   imdb_id: string | null;
   production_countries: {
-    release_date: string;
-    revenue: number;
-    runtime: number | null;
-  }[];
-  spoken_languages: {
-    iso_639_1: string;
+    iso_3166_1: string;
     name: string;
   }[];
+  release_date: string;
+  revenue: number;
+  runtime: number | null;
   status:
     | 'Rumored'
     | 'Planned'
@@ -125,11 +128,7 @@ export interface IDetailTv extends IDetail {
     poster_path: string;
     season_number: number;
   }[];
-  spoken_languages: {
-    english_name: string;
-    iso_639_1: string;
-    name: string;
-  }[];
+
   status: string;
 }
 
@@ -147,4 +146,39 @@ export interface IGenre {
 
 export interface IConfig {
   [key: string]: string | number;
+}
+
+export interface Video {
+  id: string;
+  iso_639_1: string;
+  iso_3166_1: string;
+  name: string;
+  key: string;
+  site: string;
+  size: number;
+  type: string;
+  official: boolean;
+  published_at: string;
+}
+
+export interface Cast {
+  id: number;
+  adult: boolean;
+  gender: number | null;
+  known_for_department: string;
+  name: string;
+  original_name: string;
+  popularity: number;
+  profile_path: string | null;
+  cast_id: number;
+  character: string;
+  credit_id: string;
+  order: number;
+}
+
+export interface DetailInfo<E> {
+  detail?: E;
+  similar?: Item[];
+  cast?: Cast[];
+  videos?: Video[];
 }

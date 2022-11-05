@@ -16,7 +16,16 @@ const ItemCard: React.FC<ItemCardProps> = ({ data }) => {
   if (!data.backdrop_path) return <></>;
 
   return (
-    <Link to="" className="card">
+    <Link
+      to={
+        data.media_type === 'movie'
+          ? `/movie/${data.id}`
+          : data.media_type === 'tv'
+          ? `/tv/${data.id}`
+          : '/'
+      }
+      className="card"
+    >
       <article className="item-card">
         <LazyLoadImage
           src={imageURL(data.poster_path, 'w300')}

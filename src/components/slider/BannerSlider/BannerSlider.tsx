@@ -14,12 +14,14 @@ import {
 import './BannerSlider.scss';
 import Button from '../../common/Button/Button';
 import Skeleton from '../../Skeleton/Skeleton';
+import { useNavigate } from 'react-router-dom';
 
 type BannerSliderProps = {
   currentTab: string;
 };
 
 const BannerSlider: React.FC<BannerSliderProps> = ({ currentTab }) => {
+  const navigate = useNavigate();
   const tvBanner = useSelector(homeTvBanner);
   const movieBanner = useSelector(homeMovieBanner);
   const banner = currentTab === 'movie' ? movieBanner : tvBanner;
@@ -86,7 +88,22 @@ const BannerSlider: React.FC<BannerSliderProps> = ({ currentTab }) => {
                       ))}
                   </div>
                   <div className="banner__cta">
-                    <Button className="btn--outline">Trailer</Button>
+                    <Button
+                      className="btn--outline"
+                      onClick={() =>
+                        navigate(
+                          `${
+                            b.media_type === 'tv'
+                              ? `/tv/${b.id}#trailer`
+                              : b.media_type === 'movie'
+                              ? `/movie/${b.id}#trailer`
+                              : '/'
+                          }`
+                        )
+                      }
+                    >
+                      Trailer
+                    </Button>
                     <Button className="btn--primary">Watch Now</Button>
                   </div>
                 </div>

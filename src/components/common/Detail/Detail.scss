@@ -1,0 +1,277 @@
+@use '../../../sass/variables' as *;
+@use '../../../sass/mixins' as *;
+
+.detail {
+  font-size: $font-size--default;
+  margin: -1.75rem;
+
+  // backdrop
+  &__backdrop {
+    position: relative;
+    width: 100%;
+    height: 75vh;
+
+    @include respond(sm) {
+      height: 40vh;
+    }
+  }
+  &__backdrop .backdrop-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    width: 100%;
+    height: 130%;
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        to top,
+        $color--background,
+        rgba($color--background, 0.8),
+        rgba($color--background, 0.6) 15%,
+        rgba($color--background, 0.4),
+        rgba($color--background, 0.2) 50%,
+        transparent
+      );
+    }
+  }
+
+  &__back {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 8px;
+    opacity: 0.8;
+    transition: all 0.2s;
+    cursor: pointer;
+
+    & > span {
+      width: 3rem;
+      height: 3rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 50%;
+      border: 1px solid $color--white;
+      transition: all 0.3s;
+    }
+
+    &:hover {
+      opacity: 1;
+      color: $color--primary;
+    }
+  }
+
+  &__type {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    padding: 4px 16px;
+    border-radius: 99px;
+    border: 2px solid $color--white;
+    opacity: 0.8;
+    box-shadow: 0 0 4px 4px rgba($color--white, 0.3);
+    background-color: rgba($color--white, 0.2);
+    color: $color--white;
+  }
+
+  &__votes {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+
+    & > span {
+      width: 50px;
+    }
+    & .CircularProgressbar-path {
+      stroke: $color--primary;
+    }
+
+    & .CircularProgressbar-trail {
+      stroke: gray;
+    }
+
+    & .CircularProgressbar-text {
+      font-size: 3rem;
+      font-weight: 700;
+      fill: white;
+    }
+  }
+
+  &__trailer-btn {
+    position: absolute;
+    bottom: 50px;
+    left: 50%;
+    padding: 1rem 3rem;
+    font-size: 2rem;
+    font-weight: 600;
+
+    @include respond(md) {
+      bottom: 50%;
+      left: 45%;
+    }
+  }
+  // backdrop end
+
+  &__contents {
+    display: flex;
+    gap: 2rem;
+    padding: 0 20px;
+  }
+
+  &__wrapper {
+    width: calc(100% - 320px);
+    display: grid;
+    grid-template-columns: 220px 1fr 1fr;
+    grid-template-rows: 300px;
+    gap: 2rem;
+
+    @include respond(md) {
+      width: 100%;
+    }
+
+    @include respond(sm) {
+      grid-template-columns: 1fr;
+      grid-template-rows: fit-content 1fr;
+    }
+  }
+
+  // poster
+  &__poster {
+    width: 220px;
+    height: 300px;
+
+    @include respond(sm) {
+      display: none !important;
+    }
+  }
+
+  &__heading {
+    grid-column: 2 / 4;
+
+    @include respond(sm) {
+      grid-column: 1 / 2;
+    }
+  }
+
+  // name
+  &__name {
+    font-size: 4.2rem;
+  }
+
+  // genres
+  &__genres {
+    display: flex;
+    gap: 1.2rem;
+    flex-wrap: wrap;
+    height: 80px;
+    overflow: hidden;
+  }
+
+  &__genre {
+    display: inline-block;
+    border: 1px solid #ccc;
+    padding: 2px 2rem;
+    border-radius: 99px;
+    height: 32px;
+
+    & > span {
+      white-space: nowrap;
+    }
+  }
+
+  &__cta {
+    margin-top: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  &__cta-watch {
+    font-size: 2.2rem;
+    width: 180px;
+    padding: 1.2rem 0;
+  }
+
+  &__cta-btn {
+    font-size: 4.2rem;
+    transition: all 0.2s;
+    cursor: pointer;
+
+    &:hover,
+    &--active {
+      color: $color--primary;
+    }
+  }
+
+  // info
+  &__info {
+    display: flex;
+    flex-direction: column;
+  }
+
+  // cast
+  &__cast > div {
+    height: 330px;
+    overflow-y: auto;
+
+    /* width */
+    &::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    /* Track */
+    &::-webkit-scrollbar-track {
+      border-radius: 10px;
+      background: #f1f1f1;
+    }
+
+    /* Handle */
+    &::-webkit-scrollbar-thumb {
+      border-radius: 10px;
+      background: #888;
+    }
+
+    /* Handle on hover */
+    &::-webkit-scrollbar-thumb:hover {
+      background: #555;
+    }
+  }
+
+  &__videos {
+    grid-column: 1 / span 3;
+
+    @include respond(sm) {
+      grid-column: 1 / 2;
+    }
+  }
+
+  &__video {
+    width: 100%;
+  }
+
+  // Similar
+  &__similar {
+    width: 320px;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+
+    @include respond(md) {
+      display: none;
+    }
+  }
+}

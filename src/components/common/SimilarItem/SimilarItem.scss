@@ -1,0 +1,39 @@
+.similar {
+  display: flex;
+  gap: 12px;
+
+  &__poster {
+    width: 140px;
+    height: 200px;
+  }
+
+  &__contents {
+    width: calc(100% - 152px);
+  }
+
+  &__name {
+    width: 100%;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    margin-bottom: 2rem;
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  &__votes {
+    width: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 99px;
+    box-shadow: 0 0 4px 4px rgba(#fff, 0.3);
+  }
+}

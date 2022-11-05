@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { BiHomeCircle, BiSearchAlt } from 'react-icons/bi';
 import { MdOutlineExplore } from 'react-icons/md';
 import { FaBars } from 'react-icons/fa';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 import './NavBar.scss';
@@ -42,10 +42,12 @@ const NavBar: React.FC<NavBarProps> = ({ isOnlyIcon, setIsOnlyIcon }) => {
       onMouseMove={() => setIsOnlyIcon(false)}
       onMouseLeave={() => setIsOnlyIcon(true)}
     >
-      <div className="logo">
-        <LazyLoadImage src={logo} effect="blur" />
-        <h1>TheAct</h1>
-      </div>
+      <Link to="/">
+        <div className="logo">
+          <LazyLoadImage src={logo} effect="blur" />
+          <h1>TheAct</h1>
+        </div>
+      </Link>
       <div className={`nav-container ${isNavMobile ? 'mobile' : ''}`}>
         <nav className="nav">
           <h1>menu</h1>
