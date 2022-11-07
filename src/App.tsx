@@ -7,6 +7,8 @@ import MovieDetail from './pages/MovieDetail/MovieDetail';
 import Search from './pages/Search/Search';
 import TvDetail from './pages/TvDetail/TvDetail';
 
+import 'react-lazy-load-image-component/src/effects/blur.css';
+
 function App() {
   return (
     <Routes>

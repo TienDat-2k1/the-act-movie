@@ -3,9 +3,11 @@ import { AiFillStar } from 'react-icons/ai';
 import { FaHeart } from 'react-icons/fa';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { Link } from 'react-router-dom';
+import 'react-lazy-load-image-component/src/effects/blur.css';
+
 import imageURL from '../../utils/imageURL';
-import { Item } from '../../utils/types';
 import Button from '../common/Button/Button';
+import { Item } from '../../utils/types';
 import './ItemCard.scss';
 
 type ItemCardProps = {
@@ -30,6 +32,7 @@ const ItemCard: React.FC<ItemCardProps> = ({ data }) => {
         <LazyLoadImage
           src={imageURL(data.poster_path, 'w300')}
           wrapperClassName="item-card__poster"
+          effect="blur"
         />
         <div className="item-card__rate">
           <AiFillStar />

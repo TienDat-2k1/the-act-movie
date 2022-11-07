@@ -51,7 +51,7 @@ const BannerSlider: React.FC<BannerSliderProps> = ({ currentTab }) => {
                 <LazyLoadImage
                   alt={b.title}
                   src={imageURL(b.backdrop_path)}
-                  effect={'blur'}
+                  effect="blur"
                 />
               </div>
               <div className="banner__contents">
