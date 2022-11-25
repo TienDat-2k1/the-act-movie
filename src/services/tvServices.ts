@@ -1,12 +1,12 @@
 import httpRequest from '../utils/httpRequest';
-import { DetailInfo, IDetailTv, Item, Video } from '../utils/types';
+import { DetailInfo, IDetailTv, Item, Video, Watch } from '../utils/types';
 
 export const getFullTvDetail = async (id: string) => {
   const res = await Promise.all([
-    httpRequest.get(`tv/${id}`),
-    httpRequest.get(`tv/${id}/similar`),
-    httpRequest.get(`tv/${id}/credits`),
-    httpRequest.get(`tv/${id}/videos`),
+    httpRequest.get(`/tv/${id}`),
+    httpRequest.get(`/tv/${id}/similar`),
+    httpRequest.get(`/tv/${id}/credits`),
+    httpRequest.get(`/tv/${id}/videos`),
   ]);
 
   const data = res.reduce((acc, curr, i) => {
@@ -32,4 +32,26 @@ export const getFullTvDetail = async (id: string) => {
   }, {} as DetailInfo<IDetailTv>);
 
   return data;
+};
+
+export const getWatchTv = async (id: number): Promise<Watch> => {
+  const res = await Promise.all([
+    httpRequest.get(`/tv/${id}`),
+    httpRequest.get(`/tv/${id}/recommendations`),
+  ]);
+
+  const data = {
+    detail: { ...res[0].data, media_type: 'tv' },
+    recommendations: res[1].data,
+  };
+
+  const detailSeasons = (
+    await Promise.all(
+      (data.detail as IDetailTv).seasons.map(season =>
+        httpRequest.get(`/tv/${id}/season/${season.season_number}`)
+      )
+    )
+  ).map(res => res.data);
+
+  return { ...data, detailSeasons };
 };

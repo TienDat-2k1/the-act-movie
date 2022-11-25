@@ -49,7 +49,19 @@ const ItemCard: React.FC<ItemCardProps> = ({ data }) => {
           <span className="item-card__date">{data.release_date}</span>
         )}
         <div className="item-card__cta">
-          <Button className="btn--primary btn--round">Watch</Button>
+          <Button
+            as={Link}
+            to={
+              data.media_type === 'movie'
+                ? `/movie/${data.id}/watch`
+                : data.media_type === 'tv'
+                ? `/tv/${data.id}/watch`
+                : '/'
+            }
+            className="btn--primary btn--round"
+          >
+            Watch
+          </Button>
           <FaHeart className="item-card__wishlist" />
         </div>
       </article>

@@ -8,6 +8,8 @@ import Search from './pages/Search/Search';
 import TvDetail from './pages/TvDetail/TvDetail';
 
 import 'react-lazy-load-image-component/src/effects/blur.css';
+import MovieWatch from './pages/MovieWatch/MovieWatch';
+import TvWatch from './pages/TvWatch/TvWatch';
 
 function App() {
   return (
@@ -18,7 +20,9 @@ function App() {
         <Route path="discovery" element={<Discovery />} />
         <Route path="search" element={<Search />} />
         <Route path="movie/:id" element={<MovieDetail />} />
+        <Route path="movie/:id/watch" element={<MovieWatch />} />
         <Route path="tv/:id" element={<TvDetail />} />
+        <Route path="tv/:id/watch" element={<TvWatch />} />
       </Route>
     </Routes>
   );

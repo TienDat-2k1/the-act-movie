@@ -1,5 +1,5 @@
 import httpRequest from '../utils/httpRequest';
-import { DetailInfo, IDetailMovie, Item, Video } from '../utils/types';
+import { DetailInfo, IDetailMovie, Item, Video, Watch } from '../utils/types';
 
 export const getFullMovieDetail = async (id: string) => {
   const res = await Promise.all([
@@ -32,4 +32,20 @@ export const getFullMovieDetail = async (id: string) => {
   }, {} as DetailInfo<IDetailMovie>);
 
   return data as DetailInfo<IDetailMovie>;
+};
+
+export const getMovieWatch = async (id: string): Promise<Watch> => {
+  const data = (
+    await Promise.all([
+      httpRequest.get(`/movie/${id}`),
+      httpRequest.get(`/movie/${id}/recommendations`),
+    ])
+  ).map(res => res.data);
+
+  return {
+    detail: { ...data[0], media_type: 'movie' },
+    recommendations: data[1].results.filter(
+      (result: Item) => result.poster_path
+    ),
+  };
 };

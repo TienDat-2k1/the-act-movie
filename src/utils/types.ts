@@ -182,3 +182,50 @@ export interface DetailInfo<E> {
   cast?: Cast[];
   videos?: Video[];
 }
+
+export interface IEpisode {
+  air_date: string;
+  crew: {
+    id: number;
+    credit_id: string;
+    name: string;
+    department: string;
+    job: string;
+    profile_path: string | null;
+  }[];
+  episode_number: number;
+  guest_stars: {
+    id: number;
+    name: string;
+    credit_id: string;
+    character: string;
+    order: number;
+    profile_path: string | null;
+  }[];
+  name: string;
+  overview: string;
+  id: number;
+  production_code: string | null;
+  season_number: number;
+  still_path: string | null;
+  vote_average: number;
+  vote_count: number;
+  runtime: number;
+}
+
+export interface IDetailSeason {
+  _id: string;
+  air_date: string;
+  name: string;
+  overview: string;
+  id: number;
+  poster_path: string;
+  season_number: number;
+  episodes: IEpisode[];
+}
+
+export interface Watch {
+  detail?: IDetailMovie | IDetailTv;
+  recommendations?: Item[];
+  detailSeasons?: IDetailSeason[];
+}

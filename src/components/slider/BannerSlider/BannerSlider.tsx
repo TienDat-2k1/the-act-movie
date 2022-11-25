@@ -14,7 +14,7 @@ import {
 import './BannerSlider.scss';
 import Button from '../../common/Button/Button';
 import Skeleton from '../../Skeleton/Skeleton';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 type BannerSliderProps = {
   currentTab: string;
@@ -104,7 +104,19 @@ const BannerSlider: React.FC<BannerSliderProps> = ({ currentTab }) => {
                     >
                       Trailer
                     </Button>
-                    <Button className="btn--primary">Watch Now</Button>
+                    <Button
+                      as={Link}
+                      to={
+                        b.media_type === 'movie'
+                          ? `/movie/${b.id}/watch`
+                          : b.media_type === 'tv'
+                          ? `/tv/${b.id}/watch`
+                          : '/'
+                      }
+                      className="btn--primary"
+                    >
+                      Watch Now
+                    </Button>
                   </div>
                 </div>
               </div>

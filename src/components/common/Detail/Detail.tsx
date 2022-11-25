@@ -11,7 +11,7 @@ import { FaShareAlt } from 'react-icons/fa';
 import { IoMdMore } from 'react-icons/io';
 import SimilarItem from '../SimilarItem/SimilarItem';
 import CastItem from '../CastItem/CastItem';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 type DetailProps<T> = {
   data: DetailInfo<T>;
@@ -81,6 +81,7 @@ const Detail = <T extends IDetailMovie | IDetailTv>({
                   objectFit: 'cover',
                   borderRadius: '20px',
                 }}
+                effect="blur"
               />
               <div className="detail__heading">
                 <h1 className="detail__name">
@@ -108,7 +109,11 @@ const Detail = <T extends IDetailMovie | IDetailTv>({
                 </ul>
                 <div>
                   <div className="detail__cta">
-                    <Button className="btn--primary btn--round detail__cta-watch">
+                    <Button
+                      as={Link}
+                      to={'watch'}
+                      className="btn--primary btn--round detail__cta-watch"
+                    >
                       Watch
                     </Button>
                     <BsSuitHeartFill className="detail__cta-btn" />
