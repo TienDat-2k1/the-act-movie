@@ -1,5 +1,5 @@
 /* eslint-disable eqeqeq */
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import imageURL from '../../utils/imageURL';
@@ -16,6 +16,10 @@ const Season = ({ season, watch, active }: SeasonProps) => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [_, setSearchParams] = useSearchParams();
   const [isExpandEpisodes, setIsExpandEpisodes] = useState(false);
+
+  useEffect(() => {
+    setIsExpandEpisodes(active);
+  }, [active]);
 
   const episodeClickHandler = (ep: IEpisode) => {
     const season = ep.season_number + '';

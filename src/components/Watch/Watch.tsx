@@ -17,6 +17,15 @@ type WatchProps = {
 
 const Watch = ({ data, watch }: WatchProps) => {
   const { id } = useParams();
+
+  const season = data?.detailSeasons?.find(
+    season => season.season_number == watch?.season
+  );
+
+  const episode = season?.episodes.find(
+    epi => epi.episode_number == watch?.episode
+  );
+
   return (
     <>
       {!data && (
@@ -48,8 +57,8 @@ const Watch = ({ data, watch }: WatchProps) => {
                 gap: '2rem',
               }}
             >
-              {new Array(6).fill(0).map(item => (
-                <Skeleton style={{ width: '100%', height: '90px' }} />
+              {new Array(6).fill(0).map((_, i) => (
+                <Skeleton key={i} style={{ width: '100%', height: '90px' }} />
               ))}
             </div>
           </div>
@@ -76,21 +85,13 @@ const Watch = ({ data, watch }: WatchProps) => {
               ) : (
                 <h1>{data?.detail?.title}</h1>
               )}
-              {watch && data?.detailSeasons && (
-                <span>
-                  {
-                    data?.detailSeasons[+watch?.season]?.episodes[
-                      +watch?.episode - 1
-                    ]?.name
-                  }
-                </span>
-              )}
+              {episode && <span>{episode.name}</span>}
             </div>
             <div className="watch__info">
               <span>
                 <span>
                   <AiFillStar className="watch-icon" />
-                  <span>{data?.detail?.vote_average}</span>
+                  <span>{data?.detail?.vote_average.toFixed(1)}</span>
                 </span>
                 <span>
                   <AiTwotoneCalendar className="watch-icon" />
@@ -115,12 +116,8 @@ const Watch = ({ data, watch }: WatchProps) => {
               <h2>Overview</h2>
               {data.detail?.media_type === 'tv' ? (
                 <>
-                  {watch && data?.detailSeasons && (
-                    <p>
-                      {data?.detailSeasons[+watch?.season]?.episodes[
-                        +watch?.episode - 1
-                      ]?.overview || data.detail?.overview}
-                    </p>
+                  {(episode || data?.detailSeasons) && (
+                    <p>{episode?.overview || data.detail.overview}</p>
                   )}
                 </>
               ) : (

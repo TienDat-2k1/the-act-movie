@@ -1,15 +1,18 @@
-import { useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import NavBar from './components/NavBar';
 
 import './MainLayout.scss';
 
-const MainLayout = () => {
-  const [isOnlyIcon, setIsOnlyIcon] = useState(true);
+type MainLayoutProps = {
+  isOnlyIcon: boolean;
+};
+
+const MainLayout = ({ isOnlyIcon }: MainLayoutProps) => {
+  // const [isOnlyIcon, setIsOnlyIcon] = useState(true);
 
   return (
     <main className="main-layout">
-      <NavBar isOnlyIcon={isOnlyIcon} setIsOnlyIcon={setIsOnlyIcon} />
+      <NavBar isOnlyIcon={isOnlyIcon} />
       <div className={`${isOnlyIcon ? 'nav-only-icon' : ''}`} id="main">
         <Outlet />
       </div>

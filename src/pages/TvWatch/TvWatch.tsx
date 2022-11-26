@@ -27,12 +27,15 @@ const TvWatch = () => {
   }, [id]);
 
   useEffect(() => {
-    const season = searchParams.get('season') || 0;
+    const season =
+      searchParams.get('season') ||
+      (data?.detailSeasons && data?.detailSeasons[0].season_number) ||
+      0;
     const episode = searchParams.get('episode') || 1;
 
     setWatch({ season, episode });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [location.search]);
+  }, [location.search, data?.detailSeasons]);
 
   return (
     <>

@@ -14,9 +14,11 @@ import TvWatch from './pages/TvWatch/TvWatch';
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<MainLayout />}>
+      <Route path="/" element={<MainLayout isOnlyIcon={false} />}>
         <Route index element={<Navigate to="home" replace />} />
         <Route path="home" element={<Home />} />
+      </Route>
+      <Route path="/" element={<MainLayout isOnlyIcon />}>
         <Route path="discovery" element={<Discovery />} />
         <Route path="search" element={<Search />} />
         <Route path="movie/:id" element={<MovieDetail />} />

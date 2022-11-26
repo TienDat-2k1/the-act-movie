@@ -29,18 +29,18 @@ const menus = [
 
 type NavBarProps = {
   isOnlyIcon: boolean;
-  setIsOnlyIcon: React.Dispatch<React.SetStateAction<boolean>>;
+  // setIsOnlyIcon: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const NavBar: React.FC<NavBarProps> = ({ isOnlyIcon, setIsOnlyIcon }) => {
+const NavBar: React.FC<NavBarProps> = ({ isOnlyIcon }) => {
   const [isNavMobile, setIsNavMobile] = useState(false);
   const { width } = useWinDowDimension();
 
   return (
     <aside
       className={`nav-bar ${width < 768 ? '' : isOnlyIcon ? 'only-icon' : ''}`}
-      onMouseMove={() => setIsOnlyIcon(false)}
-      onMouseLeave={() => setIsOnlyIcon(true)}
+      // onMouseMove={() => setIsOnlyIcon(false)}
+      // onMouseLeave={() => setIsOnlyIcon(true)}
     >
       <Link to="/">
         <div className="logo">
