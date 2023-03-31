@@ -66,12 +66,16 @@ export const createUserDocumentFromAuth = async (userAuth: User) => {
   if (!userSnapshot.exists()) {
     const { displayName, email } = userAuth;
     const createdAt = new Date();
+    const bookmarks = [] as Bookmark[];
+    const history = [] as History[];
 
     try {
       await setDoc(userDocRef, {
         displayName,
         email,
         createdAt,
+        bookmarks,
+        history,
       });
     } catch (error) {
       console.log('error creating the user', error);
