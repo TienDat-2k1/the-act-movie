@@ -30,18 +30,18 @@ The Movie Database API
 
 ## Screenshots, Preview
 
-![Screenshot 1](https://drive.google.com/file/d/1q6NsIlltYGlyUGY5j5edNoOjKWZApUXI/view?usp=share_link)
+![Screenshot 1](https://github.com/TienDat-2k1/photo/blob/main/home.png?raw=true)
 
-![Screenshot 2](https://drive.google.com/file/d/1auX59T4tcJkrAzYCW8SEGleLn5-mzAYm/view?usp=share_link)
+![Screenshot 2](https://github.com/TienDat-2k1/photo/blob/main/detail.png?raw=true)
 
-![Screenshot 3](https://drive.google.com/file/d/16tAYL5HT2qZkgo48XjJr83PH7QxLpTu7/view?usp=share_link)
+![Screenshot 3](https://github.com/TienDat-2k1/photo/blob/main/discover.png?raw=true)
 
-![Screenshot 4](https://drive.google.com/file/d/1PwzWwrtZSxqI8sgRAgzopRzllzu440fF/view?usp=share_link)
+![Screenshot 4](https://github.com/TienDat-2k1/photo/blob/main/watch.png?raw=true)
 
-![Screenshot 5](https://drive.google.com/file/d/1g3Xy3jJlgdMrVbWQ_kP1RxcZ-OyKa-7H/view?usp=share_link)
+![Screenshot 5](https://github.com/TienDat-2k1/photo/blob/main/history.png?raw=true)
 
-![Screenshot 6](https://drive.google.com/file/d/1vkVL9nro-7x31CDriP0uAc-4XcJAOMrg/view?usp=share_link)
+![Screenshot 6](https://github.com/TienDat-2k1/photo/blob/main/favorite%20list.png?raw=true)
 
-![Screenshot 7](https://drive.google.com/file/d/1787aLbGwuO75ooD5NUDzX_W2a4EZwx17/view?usp=share_link)
+![Screenshot 7](https://github.com/TienDat-2k1/photo/blob/main/search.png?raw=true)
 
-![Screenshot 8](https://drive.google.com/file/d/1oGQgHk_nlwwhpcuE0WL6vdRI7-_COzkO/view?usp=share_link)
+![Screenshot 8](https://github.com/TienDat-2k1/photo/blob/main/loggin.png?raw=true)
