@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import { useDispatch } from 'react-redux';
+import AuthModal from '../../components/AuthModal/AuthModal';
 import Header from '../../components/Header/Header';
 import BannerSlider from '../../components/slider/BannerSlider/BannerSlider';
 import {

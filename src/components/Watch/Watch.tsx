@@ -1,11 +1,15 @@
+import { useEffect } from 'react';
 import { AiFillStar, AiTwotoneCalendar } from 'react-icons/ai';
 import { useParams } from 'react-router-dom';
-import { embedMovie, embedTv } from '../../utils/functions';
+import { addHistory, embedMovie, embedTv } from '../../utils/functions';
 import { IDetailMovie, Watch as WatchType } from '../../utils/types';
 import Recommendation from '../Recommendation/Recommendation';
 import Season from '../Season/Season';
 import Skeleton from '../Skeleton/Skeleton';
 import './Watch.scss';
+import { updateUserHistoryDocument } from '../../utils/firebase';
+import { useSelector } from 'react-redux';
+import { historySelector, userSelector } from '../../store/user/userSelector';
 
 type WatchProps = {
   data: WatchType | undefined;
@@ -17,6 +21,32 @@ type WatchProps = {
 
 const Watch = ({ data, watch }: WatchProps) => {
   const { id } = useParams();
+
+  const user = useSelector(userSelector);
+  const history = useSelector(historySelector);
+
+  useEffect(() => {
+    const updateHistory = async () => {
+      user.uid &&
+        data?.detail &&
+        (await updateUserHistoryDocument(
+          user.uid,
+          addHistory(history, {
+            id: data.detail.id,
+            type: data.detail.media_type,
+            timestamp: new Date(),
+          })
+        ));
+    };
+
+    // updateHistory();
+
+    return () => {
+      (async function () {
+        await updateHistory();
+      })();
+    };
+  }, [data?.detail]);
 
   const season = data?.detailSeasons?.find(
     season => season.season_number == watch?.season

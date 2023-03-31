@@ -1,4 +1,6 @@
+import { useState } from 'react';
 import { Outlet } from 'react-router-dom';
+import AuthModal from '../../components/AuthModal/AuthModal';
 import NavBar from './components/NavBar';
 
 import './MainLayout.scss';

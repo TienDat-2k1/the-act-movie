@@ -1,0 +1,48 @@
+@use '../../sass/variables' as *;
+@use '../../sass/mixins' as *;
+
+.auth-modal {
+  background-color: $color--background;
+  position: absolute;
+  width: 40vw;
+  min-width: 40rem;
+  height: 80vh;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 2rem;
+  border-radius: 8px;
+
+  @include respond(sm) {
+    width: 90vw;
+    min-width: 32rem;
+  }
+}
+
+.auth {
+  &__title {
+    text-align: center;
+    color: $color--text;
+  }
+
+  &__buttons {
+    width: 80%;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  &__btn {
+    width: 100%;
+    font-size: 1.8rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 2rem;
+  }
+
+  &__icon {
+    font-size: 3rem;
+  }
+}

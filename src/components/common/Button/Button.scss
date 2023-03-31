@@ -39,4 +39,8 @@
     background-color: $color--primary;
     box-shadow: 0 0 4px 2px $color--primary-light;
   }
+
+  &--red {
+    background-color: $color--accent-red;
+  }
 }

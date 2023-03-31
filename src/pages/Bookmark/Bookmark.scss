@@ -1,0 +1,12 @@
+.bookmarks-list {
+  margin-top: 12px;
+  display: flex;
+  gap: 2rem;
+}
+
+.bookmarks {
+  &__heading {
+    display: flex;
+    justify-content: space-between;
+  }
+}

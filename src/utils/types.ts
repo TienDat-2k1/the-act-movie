@@ -229,3 +229,25 @@ export interface Watch {
   recommendations?: Item[];
   detailSeasons?: IDetailSeason[];
 }
+
+export type Bookmark = {
+  id: number;
+  type: 'tv' | 'movie' | 'person';
+};
+
+export type History = {
+  id: number;
+  type: 'tv' | 'movie' | 'person';
+  timestamp: Date;
+  duration?: number;
+};
+
+export type User = {
+  uid: string | null;
+  displayName: string | null;
+  email: string | null;
+  photoURL: string | null;
+  bookmarks: Bookmark[];
+  history: History[];
+  createdAt: any;
+};

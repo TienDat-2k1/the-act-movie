@@ -34,6 +34,14 @@ export const getFullMovieDetail = async (id: string) => {
   return data as DetailInfo<IDetailMovie>;
 };
 
+export const getMovie = async (id: number) => {
+  const res = await httpRequest.get(`/movie/${id}`);
+
+  const data = { ...res.data, media_type: 'movie' } as Item;
+
+  return data;
+};
+
 export const getMovieWatch = async (id: string): Promise<Watch> => {
   const data = (
     await Promise.all([

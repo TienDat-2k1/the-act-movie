@@ -4,7 +4,12 @@ import { CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 
 import imageURL from '../../../utils/imageURL';
-import { DetailInfo, IDetailMovie, IDetailTv } from '../../../utils/types';
+import {
+  Bookmark,
+  DetailInfo,
+  IDetailMovie,
+  IDetailTv,
+} from '../../../utils/types';
 import './Detail.scss';
 import Button from '../Button/Button';
 import { FaShareAlt } from 'react-icons/fa';
@@ -12,6 +17,14 @@ import { IoMdMore } from 'react-icons/io';
 import SimilarItem from '../SimilarItem/SimilarItem';
 import CastItem from '../CastItem/CastItem';
 import { Link, useNavigate } from 'react-router-dom';
+import { updateUserBookmarkDocument } from '../../../utils/firebase';
+import { addOrRemove } from '../../../utils/functions';
+import { toast } from 'react-toastify';
+import { useSelector } from 'react-redux';
+import {
+  bookmarksSelector,
+  userSelector,
+} from '../../../store/user/userSelector';
 
 type DetailProps<T> = {
   data: DetailInfo<T>;
@@ -23,11 +36,23 @@ const Detail = <T extends IDetailMovie | IDetailTv>({
 }: DetailProps<T>) => {
   const navigate = useNavigate();
   const { detail, cast, similar, videos } = data;
+  const user = useSelector(userSelector);
+  const bookmarks = useSelector(bookmarksSelector);
 
   const languages = detail?.spoken_languages.reduce((acc, curr) => {
     if (!curr.english_name) return acc;
     return [...acc, curr.english_name];
   }, [] as string[]);
+
+  const itemBookmarksHandler = async (item: Bookmark) => {
+    if (!user.uid) {
+      toast.info('You must login for this action!!');
+      return;
+    }
+
+    await updateUserBookmarkDocument(user.uid, addOrRemove(bookmarks, item));
+    toast.success('Update bookmarks!');
+  };
 
   return (
     <>
@@ -116,7 +141,17 @@ const Detail = <T extends IDetailMovie | IDetailTv>({
                     >
                       Watch
                     </Button>
-                    <BsSuitHeartFill className="detail__cta-btn" />
+                    <BsSuitHeartFill
+                      className={`detail__cta-btn detail__wishlist ${
+                        bookmarks &&
+                        bookmarks.find(bookmark => bookmark.id === detail.id) &&
+                        'detail__wishlist--active'
+                      }`}
+                      onClick={itemBookmarksHandler.bind(null, {
+                        id: detail.id,
+                        type: detail.media_type,
+                      })}
+                    />
                     <FaShareAlt className="detail__cta-btn" />
                     <IoMdMore className="detail__cta-btn" />
                   </div>

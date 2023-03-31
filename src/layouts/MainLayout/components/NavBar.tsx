@@ -8,6 +8,15 @@ import { LazyLoadImage } from 'react-lazy-load-image-component';
 import './NavBar.scss';
 import logo from '../../../assets/img/logo.png';
 import useWinDowDimension from '../../../hooks/useWindowDimensions';
+import { BsClockHistory, BsFillBookmarksFill } from 'react-icons/bs';
+import { CgProfile } from 'react-icons/cg';
+import { FiLogIn, FiLogOut } from 'react-icons/fi';
+import { useDispatch, useSelector } from 'react-redux';
+import { isLoggedSelector } from '../../../store/user/userSelector';
+import { signOutUser } from '../../../utils/firebase';
+import { logOut } from '../../../store/user/userSlice';
+import AuthModal from '../../../components/AuthModal/AuthModal';
+import { toast } from 'react-toastify';
 
 const menus = [
   {
@@ -27,14 +36,39 @@ const menus = [
   },
 ];
 
+const general = [
+  {
+    name: 'Bookmarked',
+    icon: <BsFillBookmarksFill />,
+    link: 'bookmark',
+  },
+  {
+    name: 'History',
+    icon: <BsClockHistory />,
+    link: 'history',
+  },
+];
+
 type NavBarProps = {
   isOnlyIcon: boolean;
   // setIsOnlyIcon: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 const NavBar: React.FC<NavBarProps> = ({ isOnlyIcon }) => {
+  const dispatch = useDispatch();
+  const islogged = useSelector(isLoggedSelector);
   const [isNavMobile, setIsNavMobile] = useState(false);
   const { width } = useWinDowDimension();
+  const [isSignInModalOpen, setIsSignInModalOpen] = useState(false);
+
+  const signout = async () => {
+    await signOutUser();
+    dispatch(logOut());
+  };
+
+  const signInModalOpen = () => {
+    setIsSignInModalOpen(true);
+  };
 
   return (
     <aside
@@ -50,20 +84,62 @@ const NavBar: React.FC<NavBarProps> = ({ isOnlyIcon }) => {
       </Link>
       <div className={`nav-container ${isNavMobile ? 'mobile' : ''}`}>
         <nav className="nav">
-          <h1>menu</h1>
-          <ul>
-            {menus.map((menu, i) => (
+          <div className="nav__menu">
+            <h1>menu</h1>
+            <ul>
+              {menus.map((menu, i) => (
+                <NavLink
+                  key={i}
+                  to={menu.link}
+                  className="nav__item"
+                  onClick={() => setIsNavMobile(false)}
+                >
+                  {menu.icon}
+                  <h2>{menu.name}</h2>
+                </NavLink>
+              ))}
+            </ul>
+          </div>
+          <div className="nav__personal">
+            <h1>general</h1>
+            <ul>
+              {general.map((menu, i) => (
+                <NavLink
+                  key={i}
+                  to={menu.link}
+                  className="nav__item"
+                  onClick={() => setIsNavMobile(false)}
+                >
+                  {menu.icon}
+                  <h2>{menu.name}</h2>
+                </NavLink>
+              ))}
+            </ul>
+          </div>
+          <div className="nav__general">
+            <h1>personal</h1>
+            <ul>
               <NavLink
-                key={i}
-                to={menu.link}
+                to="profile"
                 className="nav__item"
                 onClick={() => setIsNavMobile(false)}
               >
-                {menu.icon}
-                <h2>{menu.name}</h2>
+                {<CgProfile />}
+                <h2>Profile</h2>
               </NavLink>
-            ))}
-          </ul>
+              {islogged ? (
+                <li className="nav__item" onClick={signout}>
+                  <FiLogIn />
+                  <h2>Logout</h2>
+                </li>
+              ) : (
+                <li className="nav__item" onClick={signInModalOpen}>
+                  <FiLogOut />
+                  <h2>Login</h2>
+                </li>
+              )}
+            </ul>
+          </div>
         </nav>
       </div>
       {/* overlay */}
@@ -72,6 +148,11 @@ const NavBar: React.FC<NavBarProps> = ({ isOnlyIcon }) => {
       <div className="nav__toggle" onClick={() => setIsNavMobile(!isNavMobile)}>
         <FaBars />
       </div>
+
+      <AuthModal
+        isOpen={isSignInModalOpen}
+        setIsModalOpen={setIsSignInModalOpen}
+      />
     </aside>
   );
 };

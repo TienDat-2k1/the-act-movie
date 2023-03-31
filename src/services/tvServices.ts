@@ -34,6 +34,14 @@ export const getFullTvDetail = async (id: string) => {
   return data;
 };
 
+export const getTv = async (id: number) => {
+  const res = await httpRequest.get(`/tv/${id}`);
+
+  const data = { ...res.data, media_type: 'tv' } as Item;
+
+  return data;
+};
+
 export const getWatchTv = async (id: number): Promise<Watch> => {
   const res = await Promise.all([
     httpRequest.get(`/tv/${id}`),

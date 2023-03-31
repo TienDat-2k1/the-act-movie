@@ -1,4 +1,5 @@
 import { EMBED_TO } from './contants';
+import { Bookmark, History } from './types';
 
 export function capitalizeLetter(letter: string) {
   return letter.charAt(0).toUpperCase() + letter.slice(1);
@@ -17,4 +18,27 @@ export function embedTv(
   episode: number | string
 ) {
   return `${EMBED_TO}/tv?id=${id}&s=${season}&e=${episode}`;
+}
+
+export function addOrRemove<T extends Bookmark | History>(
+  array: T[],
+  newElement: T
+): T[] {
+  const existingItem = array.findIndex(element => element.id === newElement.id);
+
+  if (existingItem === -1) {
+    return [...array, newElement];
+  } else {
+    return array.filter(element => element.id !== newElement.id);
+  }
+}
+
+export function addHistory<T extends History>(array: T[], newElement: T): T[] {
+  const existingItem = array.findIndex(element => element.id === newElement.id);
+
+  if (existingItem === -1) {
+    return [...array, newElement];
+  } else {
+    return array.splice(existingItem, 1, newElement);
+  }
 }

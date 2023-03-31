@@ -1,0 +1,72 @@
+.profile {
+  height: 100%;
+
+  &__title {
+    color: #ccc;
+    border-bottom: 1px solid #646464;
+  }
+
+  &__l {
+    flex: 1;
+  }
+
+  &__r {
+    width: 40%;
+    min-width: 32rem;
+  }
+
+  &__content {
+    padding: 20px 0;
+  }
+
+  &__photo {
+    margin-top: 2rem;
+    position: relative;
+    width: 240px;
+    height: 240px;
+    border-radius: 50%;
+    border: 1px solid #ddd;
+
+    &::after {
+      content: '';
+      display: block;
+      position: absolute;
+      width: 110%;
+      height: 110%;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      border: 1px solid #ccc;
+    }
+
+    & input {
+      display: none;
+    }
+
+    & label {
+      font-size: 2.4rem;
+      position: absolute;
+      bottom: 40px;
+      right: -16px;
+      cursor: pointer;
+    }
+  }
+
+  &__avatar {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    overflow: hidden;
+  }
+
+  & p {
+    color: #ccc;
+  }
+}
+
+.profile-container {
+  min-height: 88vh;
+  display: flex;
+  gap: 80px;
+}

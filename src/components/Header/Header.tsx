@@ -1,6 +1,13 @@
+import { useState } from 'react';
+import Tippy from '@tippyjs/react/headless';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
+import { useDispatch, useSelector } from 'react-redux';
+import { isLoggedSelector, userSelector } from '../../store/user/userSelector';
 import SearchInput from '../common/SearchInput/SearchInput';
 import './Header.scss';
+import AuthModal from '../AuthModal/AuthModal';
+import { signOutUser } from '../../utils/firebase';
+import { logOut } from '../../store/user/userSlice';
 
 type HeaderProps = {
   currentTab: string;
@@ -8,6 +15,21 @@ type HeaderProps = {
 };
 
 const Header: React.FC<HeaderProps> = ({ currentTab, onChangeTab }) => {
+  const dispatch = useDispatch();
+  const isLogged = useSelector(isLoggedSelector);
+  const user = useSelector(userSelector);
+  const [isSignInModalOpen, setIsSignInModalOpen] = useState(false);
+
+  const signOut = async () => {
+    await signOutUser();
+
+    dispatch(logOut());
+  };
+
+  const signInModalOpen = () => {
+    setIsSignInModalOpen(true);
+  };
+
   return (
     <header className="header">
       <nav>
@@ -29,15 +51,53 @@ const Header: React.FC<HeaderProps> = ({ currentTab, onChangeTab }) => {
       <div className="home__search">
         <SearchInput />
       </div>
-      <div className="home__user">
-        <h4>To Nguyen Tien Dat</h4>
-        <div>
-          <LazyLoadImage
-            src="https://icons.veryicon.com/png/o/internet--web/prejudice/user-128.png"
-            effect="blur"
-          />
+      {isLogged && (
+        <Tippy
+          interactive
+          render={attrs => (
+            <div className="user-popup" {...attrs}>
+              <ul className="user-popup__list">
+                <li className="user-popup__item" onClick={signOut}>
+                  Logout
+                </li>
+              </ul>
+            </div>
+          )}
+        >
+          <div className="home__user">
+            <h4>{user.displayName}</h4>
+            <div>
+              {user.photoURL && (
+                <LazyLoadImage src={user.photoURL} effect="blur" alt="avatar" />
+              )}
+              {/* {user.photoURL && <img src={user.photoURL} alt="avatar" />} */}
+            </div>
+          </div>
+        </Tippy>
+      )}
+      {!isLogged && (
+        <div className="home__user">
+          <Tippy
+            render={attrs => (
+              <div className="box" {...attrs}>
+                Login now
+              </div>
+            )}
+          >
+            <button
+              className="btn btn--outline btn--round btn--primary"
+              style={{ fontSize: '2rem' }}
+              onClick={signInModalOpen}
+            >
+              SignIn
+            </button>
+          </Tippy>
         </div>
-      </div>
+      )}
+      <AuthModal
+        isOpen={isSignInModalOpen}
+        setIsModalOpen={setIsSignInModalOpen}
+      />
     </header>
   );
 };

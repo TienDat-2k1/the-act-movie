@@ -211,7 +211,13 @@
     transition: all 0.2s;
     cursor: pointer;
 
-    &:hover,
+    &:hover:not(.detail__wishlist),
+    &--active {
+      color: $color--primary;
+    }
+  }
+
+  &__wishlist {
     &--active {
       color: $color--primary;
     }
