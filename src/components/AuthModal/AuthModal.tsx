@@ -46,19 +46,36 @@ const AuthModal = ({ isOpen, setIsModalOpen }: AuthModalType) => {
 
   const logGoogleUser = async () => {
     const res = await signInWithGooglePopup();
-    const userRef = await createUserDocumentFromAuth(res.user);
+    console.log(res);
 
-    if (res.user) {
-      const { uid, displayName, email, photoURL } = res.user;
-      const { bookmarks, history } = userRef;
-
-      dispatch(
-        signInSuccess({ uid, displayName, email, photoURL, bookmarks, history })
-      );
-      toast.success('Login successful');
-    } else {
+    if (!res) {
       dispatch(signInError(res));
     }
+
+    const { user } = res;
+    const userRef = await createUserDocumentFromAuth(user);
+    const { uid, displayName, email, photoURL } = user;
+
+    const { bookmarks = [], history = [] } = userRef || {};
+
+    dispatch(
+      signInSuccess({ uid, displayName, email, photoURL, bookmarks, history })
+    );
+    toast.success('Login successful');
+    // if (res) {
+    //   const userRef = await createUserDocumentFromAuth(res.user);
+    //   const { uid, displayName, email, photoURL } = res.user;
+
+    //   const { bookmarks = [], history = [] } = userRef;
+
+    //   console.log('loggin ');
+    //   dispatch(
+    //     signInSuccess({ uid, displayName, email, photoURL, bookmarks, history })
+    //   );
+    //   toast.success('Login successful');
+    // } else {
+    //   dispatch(signInError(res));
+    // }
   };
 
   // const logFbUser = async () => {
